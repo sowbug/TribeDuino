@@ -128,6 +128,11 @@ bool is_weird_packet(uint8_t packet_number) {
   return packet_number == 0 || packet_number == TOTAL_PACKETS;
 }
 
+void hang() {
+  while (true) {
+  }
+}
+
 void loop() {
   p("\n\nReady for sound file... ");
   wait_for_sound();
@@ -154,6 +159,7 @@ void loop() {
   uint8_t packets_read = 0;
 
   uint16_t simple_checksum = 0;
+  uint8_t packet_checksum = 0;
   uint16_t total_packet_bytes_read = 0;
 
   uint8_t byte = 0;  // The register into which we shift bits.
@@ -198,14 +204,14 @@ void loop() {
       if (state == READ_PROLOGUE) {
         if (byte != 0xA9) {
           p("Error: expected READ_PROLOGUE 0xA9, but got %02x.\n", byte);
-          while (true) {
-          }
+          hang();
         }
 
         // Prologue was good. Flip on the LED and switch to the packet-reading
         // state.
         digitalWrite(13, HIGH);
         state = READ_PACKET;
+        packet_checksum = 0;
 
         continue;
       }
@@ -229,6 +235,7 @@ void loop() {
         bool is_weird = is_weird_packet(packets_read);
         if (!is_weird) {
           simple_checksum += byte;
+          packet_checksum += byte;
           ++total_packet_bytes_read;
         }
 
@@ -249,8 +256,7 @@ void loop() {
             p("Successfully read %d packets. Checksum %u. "
               "Firmware bytes %u.\n", packets_read, simple_checksum,
               total_packet_bytes_read);
-            while (true) {
-            }
+            hang();
           }
           continue;
         }
@@ -270,18 +276,26 @@ void loop() {
         if (bytes[0] != 0x55 || bytes[1] != 0x55 || bytes[2] != 0x55) {
           p("Error: expected epilogue, but got %02x%02x%02x.\n", bytes[0],
             bytes[1], bytes[2]);
-          while (true) {
-          }
+          hang();
         }
 
-        // bytes[3] is the checksum, we think. It varies.
+        // Thanks to Ludovic Lacoste for determining checksum algorithm.
+        // (I didn't try to figure it out, but it's pretty much the same
+        // modular sum algorithm that I was using for the so-called simple
+        // checksum of the overall firmware file.)
+        //
+        // https://gist.github.com/1431500
+        if (bytes[3] != packet_checksum) {
+          p("Error: expected packet checksum %02x, but got %02x.\n",
+            packet_checksum, bytes[3]);
+          hang();
+        }
 
         if (bytes[4] != 0xFF) {
           // The 0xFF isn't strictly speaking part of the epilogue, but we know
           // that every packet should be followed by a sync phase.
           p("Error: expected 0xFF after epilogue, but got %02x.\n", bytes[4]);
-          while (true) {
-          }
+          hang();
         }
         continue;
       }

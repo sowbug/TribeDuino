@@ -51,7 +51,9 @@ This project wouldn't have been possible without the hard work of these folks:
 
 - [nitro2k01](http://blog.gg8.se/wordpress/2011/12/04/korg-monotribe-firmware-20-analysis/)
 
-- [Gravitronic](http://gravitronic.blogspot.com/2011/12/decoding-korg-monotribe-firmware.html)
+- [Th0mas/Gravitronic](http://gravitronic.blogspot.com/2011/12/decoding-korg-monotribe-firmware.html)
+
+- [Ludovic Lacoste (aka Ludo6431)](http://ludolacoste.com)
 
 - [arms22](http://code.google.com/p/arms22/). I actually didn't look at this code at all, but it served as a compelling existence proof of an Arduino soft modem.
 
