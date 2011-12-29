@@ -1,7 +1,7 @@
 Introduction
 ============
 
-TribeDuino is a proof of concept that uses an Arduino to read a [Korg Monotribe](http://www.korg.com/monotribe) firmware file in m4a audio format. It doesn't do anything with the data except calculate a checksum to prove that it read it correctly. The program works by connecting an [Arduino](http://www.arduino.cc/) to an MP3 player of some kind (I used an iPhone and a MacBook Pro) via an audio patch cable, and then playing the firmware audio file so that the Arduino can hear it.
+TribeDuino is a proof of concept that uses an Arduino to read a [Korg Monotribe](http://www.korg.com/monotribe) firmware file in m4a audio format. It doesn't do anything with the data except calculate a checksum to prove that it read it correctly. The program works by connecting an [Arduino](http://www.arduino.cc/) to an MP3 player of some kind via an audio patch cable, and then playing the firmware audio file so that the Arduino can hear it.
 
 Background
 ==========
@@ -19,7 +19,7 @@ Instructions
 
 1. Connect the back part of the barrel to GND, then the tip to A0.
 
-1. Plug your audio source (computer, iPod, whatever) to the jack.
+1. Plug your audio source (computer, iPod, whatever) to the jack. I got good checksums on an iPhone and a laptop.
 
 1. Crank the volume all the way up.
 
@@ -56,3 +56,8 @@ This project wouldn't have been possible without the hard work of these folks:
 - [arms22](http://code.google.com/p/arms22/). I actually didn't look at this code at all, but it served as a compelling existence proof of an Arduino soft modem.
 
 Korg, if you're reading this, feel free to send me a Monotribe. Thanks.
+
+Next Steps
+==========
+
+I got interested in this project because I want to build an Arduino development environment that works with minimal hardware. It'd be cool to be able to develop a sketch on a smartphone web browser, then program the Arduino using just the headphone jack.
