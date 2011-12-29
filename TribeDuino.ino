@@ -1,31 +1,9 @@
 // TribeDuino: A proof of concept that uses an Arduino to read a Korg
-// monotribe firmware file in m4a audio format.
+// Monotribe firmware file in m4a audio format.
 //
 // By Mike Tsao (http://github.com/sowbug)
 //
-// This program works by connecting an Arduino to an MP3 player of some kind
-// (I used an iPhone and a MacBook Pro) via an audio patch cable. Specifically,
-// get an audio jack and connect the back part of the barrel to GND, then the
-// tip to A0. Then crank the volume all the way up. Upload the sketch to the
-// Arduino and open up the serial monitor @57600. Start playing
-// MONOTRIBE_SYS_0201.m4a when you see "Ready for sound file..." in the serial
-// monitor window. After about 2 minutes you should see a success message.
-//
-// Troubleshooting:
-//
-// - Turn the volume all the way up. Don't worry, it won't hurt the Arduino.
-// - Turn off %&$@! webpages that play ads with sounds. I wasted about an hour
-//   before I figured out this was happening.
-// - Try again. The sketch is not too solid.
-// - If you're going the iPhone route, make sure iTunes didn't re-encode the
-//   m4a to 128Kbps AAC, which almost works but doesn't.
-//
-// This wouldn't have been possible without the hard work of these folks:
-//
-// http://blog.gg8.se/wordpress/2011/12/04/korg-monotribe-firmware-20-analysis/
-// http://gravitronic.blogspot.com/2011/12/decoding-korg-monotribe-firmware.html
-//
-// Korg, if you're reading this, feel free to send me a Monotribe. Thanks.
+// See included README for instructions and credits.
 
 #include <stdarg.h>
 
@@ -34,8 +12,8 @@
 // The number of packets we should expect to see in this firmware file.
 const uint8_t TOTAL_PACKETS = 129;
 
-// Found at http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11
 // This makes analogRead() go faster.
+// Found at http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11
 #ifndef cbi
 #define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
 #endif
@@ -68,7 +46,7 @@ void setup() {
   // Blink LED to show that we're reading a packet.
   pinMode(13, OUTPUT);
 
-  // set prescale to 16
+  // Set prescale to 16.
   // See http://www.arduino.cc/cgi-bin/yabb2/YaBB.pl?num=1208715493/11
   sbi(ADCSRA,ADPS2);
   cbi(ADCSRA,ADPS1);
@@ -108,9 +86,16 @@ inline void waitForRisingEdge() {
 // Determines the carrier frequency. Takes advantage of the ~2-second run
 // of high bits at the start of the sequence.
 //
+// Rainy-day activity: regenerate a sine wave using Audacity and see whether
+// your Arduino can keep up. How high a bitrate can you achieve?
+//
 // See http://en.wikipedia.org/wiki/Frequency-shift_keying if you don't know
 // what carrier frequency means. And if you do figure out what it means,
-// please tell me.
+// please tell me; I'm only beginning to understand it. The trick is that the
+// data signal modulates the carrier's _frequency_, not amplitude. For some
+// reason when I was trying to conceptualize it, I kept adding together the
+// data/carrier waves in my head (i.e., amplitude modulation), and it wasn't
+// working out.
 float determine_frequency() {
   const int SAMPLE_COUNT = 128;
   unsigned long samples[SAMPLE_COUNT];
