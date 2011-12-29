@@ -247,7 +247,7 @@ void loop() {
 
           if (++packets_read == TOTAL_PACKETS) {
             p("Successfully read %d packets. Checksum %u. "
-              "Firmware bytes %u\n.", packets_read, simple_checksum,
+              "Firmware bytes %u.\n", packets_read, simple_checksum,
               total_packet_bytes_read);
             while (true) {
             }
