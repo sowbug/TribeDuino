@@ -6,6 +6,8 @@ audio-encoded firmware file. It doesn't do anything with the data except calcula
 read it correctly. The program works by connecting an [Arduino](http://www.arduino.cc/) to an MP3 player of
 some kind via an audio patch cable, and then playing the firmware audio file so that the Arduino can hear it.
 
+*UPDATE* Want to program Arduinos with sound? See [Audioino](http://hackaday.com/2011/09/09/program-an-arduino-using-your-sound-card/)! 
+
 Background
 ==========
 
@@ -71,7 +73,7 @@ This project wouldn't have been possible without the hard work of these folks:
 
 - [arms22](http://code.google.com/p/arms22/). I actually didn't look at this code at all, but it served as a compelling existence proof of an Arduino soft modem.
 
-After this project got mentioned on [Hack A Day](http://hackaday.com/2011/12/30/programming-an-arduino-using-an-audio-file/),
+After [Hack A Day](http://hackaday.com/2011/12/30/programming-an-arduino-using-an-audio-file/) mentioned this project,
 a commenter pointed out the [Audioino](http://hackaday.com/2011/09/09/program-an-arduino-using-your-sound-card/) project,
 which does the same thing but has an ATmega bootloader as well as an IDE to generate new sound files. Check it out!
 
