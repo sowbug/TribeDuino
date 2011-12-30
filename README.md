@@ -6,7 +6,7 @@ audio-encoded firmware file. It doesn't do anything with the data except calcula
 read it correctly. The program works by connecting an [Arduino](http://www.arduino.cc/) to an MP3 player of
 some kind via an audio patch cable, and then playing the firmware audio file so that the Arduino can hear it.
 
-*UPDATE* Want to program Arduinos with sound? See [Audioino](http://hackaday.com/2011/09/09/program-an-arduino-using-your-sound-card/)! 
+**UPDATE**: Want to program Arduinos with sound? See [Audioino](http://hackaday.com/2011/09/09/program-an-arduino-using-your-sound-card/)! 
 
 Background
 ==========
