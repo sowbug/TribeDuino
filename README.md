@@ -15,7 +15,7 @@ between peaks. Over time, variations in the peak-to-peak period represent data. 
 FSK, which means that there are only two possible period lengths. A short period is a binary one, and a long
 period is a binary zero.
 
-There is a 342-short-bit gap between packets that would seem pointless for a PC that's decoding the WAV file
+There is a 342-short-bit gap between packets that would seem pointless for a PC that's decoding the sound file
 offline. But for an Arduino or Monotribe that is reading the audio stream real-time, it's a much-needed
 75-millisecond break during which the device can do something interesting with the packet it just decoded, such
 as writing it to flash memory, without falling behind for the next packet.
