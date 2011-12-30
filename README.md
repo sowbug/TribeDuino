@@ -71,6 +71,10 @@ This project wouldn't have been possible without the hard work of these folks:
 
 - [arms22](http://code.google.com/p/arms22/). I actually didn't look at this code at all, but it served as a compelling existence proof of an Arduino soft modem.
 
+After this project got mentioned on [Hack A Day](http://hackaday.com/2011/12/30/programming-an-arduino-using-an-audio-file/),
+a commenter pointed out the [Audioino](http://hackaday.com/2011/09/09/program-an-arduino-using-your-sound-card/) project,
+which does the same thing but has an ATmega bootloader as well as an IDE to generate new sound files. Check it out!
+
 Korg, if you're reading this, feel free to send me a Monotribe. Thanks.
 
 So What Exactly Is The Concept That This Proves?
